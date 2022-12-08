@@ -10,15 +10,6 @@ def part1():
     
     summm = np.zeros_like(grid)
     for i in range(4):
-        # print(grid)
-
-        # from_edge_not_zero = np.zeros_like(grid) what
-        # from_edge_above_zero = np.zeros_like(grid)
-        # np.put(from_edge_not_zero, np.argmax((grid-np.array([[np.max(line[0:i+1]) for i in np.arange(grid.shape[0])] for line in grid]))!=0, axis=1)+np.arange(0, grid.shape[0]**2, grid.shape[0]), 1)
-        # np.put(from_edge_above_zero, np.argmax((grid-np.array([[np.max(line[0:i+1]) for i in np.arange(grid.shape[0])] for line in grid]))>0, axis=1)+np.arange(0, grid.shape[0]**2, grid.shape[0]), 1)
-
-        # un = np.bitwise_and(from_edge_not_zero, from_edge_not_zero)
-        # print(grid)
         hhh=np.array([[np.max(line[0:i+1]) for i in np.arange(grid.shape[0])] for line in grid])
         hhh_pad = np.pad(hhh, 1, constant_values=0)
         hhh_rol = np.roll(hhh_pad, 1, 1)
