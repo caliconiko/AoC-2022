@@ -37,9 +37,6 @@ def part1():
     print(len(visited))
 
 def part2():
-    head = np.zeros(2)
-    tail = np.zeros(2)
-    
     visited = np.array([[0,0]])
 
     number_of_knots = 10
