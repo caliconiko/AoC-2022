@@ -1,7 +1,7 @@
 from __future__ import annotations
 import numpy as np
 
-with open("day11test.txt") as f:
+with open("day11.txt") as f:
     raw = f.read()
     lines = raw.splitlines()
 
@@ -96,7 +96,7 @@ def part2():
             if self.divisible_test_prod:
                 return self.divisible_test_prod
             else:
-                self.divisible_test_prod = np.product([monkey.divisible_test for monkey in self.monkeys])
+                self.divisible_test_prod = np.product([monkey.divisible_test for monkey in self.monkeys], dtype=np.longlong)
                 return self.divisible_test_prod
 
     class Monkey:
@@ -144,9 +144,9 @@ def part2():
 
         monkey_business.add_monkey(starting_items, operation_string, divisible_test, true_monkey, false_monkey)
 
-    for _ in range(1000):
+    for _ in range(10000):
         monkey_business.do_round_of_business()
     print([monkey.inspection_count for monkey in monkey_business.monkeys])
-    # print(np.product(np.sort([monkey.inspection_count for monkey in monkey_business.monkeys])[::-1][0:2]))
+    print(np.product(np.sort([monkey.inspection_count for monkey in monkey_business.monkeys])[::-1][0:2], dtype=np.longlong))
 
 part2()
