@@ -78,6 +78,7 @@ def part2():
     class MonkeyBusiness:
         def __init__(self) -> None:
             self.monkeys:list[Monkey] = []
+            self.divisible_test_prod = None
 
         def add_monkey(self, starting_items:list[int], operation_string:str, divisible_test:int, true_monkey:int, false_monkey:int):
             self.monkeys.append(Monkey(self, starting_items, operation_string, divisible_test, true_monkey, false_monkey))
@@ -90,6 +91,13 @@ def part2():
                 # print(i)
                 # print(self.monkeys)
                 monkey.do_business()
+
+        def get_divisible_test_prod(self):
+            if self.divisible_test_prod:
+                return self.divisible_test_prod
+            else:
+                self.divisible_test_prod = np.product([monkey.divisible_test for monkey in self.monkeys])
+                return self.divisible_test_prod
 
     class Monkey:
         def __init__(self, monkey_business:MonkeyBusiness, starting_items:list[int], operation_string:str, divisible_test:int, true_monkey:int, false_monkey:int) -> None:
@@ -110,6 +118,7 @@ def part2():
                 item_worry_level = self.item_worry_levels.pop(0)
                 self.inspection_count+=1
                 old = item_worry_level
+                old %=monkey_business.get_divisible_test_prod()
                 new_worry_level = eval(self.operation_string)
 
                 if new_worry_level%self.divisible_test==0:
@@ -135,7 +144,7 @@ def part2():
 
         monkey_business.add_monkey(starting_items, operation_string, divisible_test, true_monkey, false_monkey)
 
-    for _ in range(20):
+    for _ in range(1000):
         monkey_business.do_round_of_business()
     print([monkey.inspection_count for monkey in monkey_business.monkeys])
     # print(np.product(np.sort([monkey.inspection_count for monkey in monkey_business.monkeys])[::-1][0:2]))
